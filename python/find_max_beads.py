@@ -21,28 +21,34 @@ def main(A):
 		# print("original A: ", A)
 		update_A = A
 		counter = 0
+		visited_array = [False for i in range(len(A))]
 		while(True):  
 			if not update_A:
 				keep_searching = False
 				break
-			# print("counter %d" % counter)
-			# print("A passed into find_beads")
-			temp = find_beads(counter, A, temp_array)
-			# print("one necklace: ", temp)
+			print("counter %d" % counter)
+
+			print("visited_array: ", visited_array)
+			if(visited_array[A[counter]]):
+				counter += 1
+				continue
+			temp = find_beads(counter, A, temp_array, visited_array)
+			print("one necklace: ", temp)
 			if len(temp) > max_found:
 				max_found = len(temp)
-			# print("max_found %d, temp length: %d" %(max_found, len(temp)))
+			print("max_found %d, temp length: %d" %(max_found, len(temp)))
 			update_A = [x for x in update_A if x not in temp]
-			# print("updated A: ", update_A)
+			print("updated A: ", update_A)
 			counter += 1
 			temp_array = []
 		return max_found
 
-def find_beads(index, array, temp_array):
+def find_beads(index, array, temp_array, visited_array):
 	temp_array.append(index)
+	visited_array[index] = True
 	if array[index] in temp_array:
 		return temp_array
-	return find_beads(array[index], array, temp_array)
+	return find_beads(array[index], array, temp_array, visited_array)
 
 
 if __name__ == '__main__':
