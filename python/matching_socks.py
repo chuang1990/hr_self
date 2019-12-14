@@ -55,6 +55,7 @@ def sockMerchant(n, ar):
 	for i in range(1, n+1):
 		count[ar[i]] += 1
 	shorten_count = [count[i] for i in count if count[i] != 0]
+    return shorten_count
 
 if __name__ == '__main__':
     fptr = open(os.environ['OUTPUT_PATH'], 'w')
