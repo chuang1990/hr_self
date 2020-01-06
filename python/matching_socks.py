@@ -51,11 +51,14 @@ import sys
 
 # Complete the sockMerchant function below.
 def sockMerchant(n, ar):
-	count = [0 for i in range(101)]
-	for i in range(1, n+1):
-		count[ar[i]] += 1
-	shorten_count = [count[i] for i in count if count[i] != 0]
-    return shorten_count
+	count_per_color = {}
+    for i in range(n):
+        if ar[i] in count_per_color.keys():
+            count_per_color[ar[i]] += 1
+        else:
+            count_per_color[ar[i]] = 1
+    pair_per_color = [(count_per_color[p]//2) for p in count_per_color]
+    return sum(pair_per_color)
 
 if __name__ == '__main__':
     fptr = open(os.environ['OUTPUT_PATH'], 'w')
